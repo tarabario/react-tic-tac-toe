@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 
 function App() {
 	const [squares, setSquares] = useState(Array(9).fill(""));
-	const [turn, setTurn] = useState("x");
-	const [winner, setWinner] = useState(false);
+	const [turn, setTurn] = useState("x");       
+	const [winner, setWinner] = useState("");
+	const [results, setResults] = useState({playerX: 0, playerO: 0})
 
 	useEffect(() => {
 		checkWin()
@@ -24,10 +25,12 @@ function App() {
 	
 	function checkWin() {
 		WIN_COMBINATIONS.forEach(combination => {
-			if (combination.every(item => squares[item] === "x") ||
-				combination.every(item => squares[item] === "o")
-			) {
-				setWinner(true)
+			if (combination.every(item => squares[item] === "x")) {
+				setResults(prevResults => ({...prevResults, playerX: prevResults.playerX + 1}))
+				setWinner("Player X")
+			} else if (combination.every(item => squares[item] === "o")) {
+				setResults(prevResults => ({ ...prevResults, playerO: prevResults.playerO + 1 }))
+				setWinner("Player O")
 			}
 		})
 	}
@@ -48,6 +51,12 @@ function App() {
 			return square
 		}))
 	}
+
+	function playAgain() {
+		setWinner("")
+		setTurn("x")
+		setSquares(Array(9).fill(""))
+	}
 	
 	const squaresElements = squares.map((item, index) =>
 		<div
@@ -56,12 +65,35 @@ function App() {
 			onClick={() => {fillSquare(index)}}
 		></div>
 	)
+	
+	const underGameField = () => (
+		winner ?
+		<>
+			<p className="congratulation">{winner} wins!</p>
+			<button
+				className="button-play-again"
+				onClick={playAgain}
+			>play again</button>
+			<p className="reset-text">refresh the page to reload the results</p>
+		</>
+		:
+		<p className="turn-text">Player {turn.toUpperCase()}'s turn!</p>
+	)
 
 	return (
 		<div className="app">
+			<div className="results-container">
+				<div className="result-block">
+					<p>Player X<br/>{results.playerX}</p>
+				</div>
+				<div className="result-block">
+					<p>Player O<br/>{results.playerO}</p>
+				</div>
+			</div>
 			<div className="squares-container">
 				{squaresElements}
 			</div>
+			{underGameField()}
 		</div>
 	);
 }
