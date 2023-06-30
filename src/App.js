@@ -27,13 +27,18 @@ function App() {
 		if (squares.every(square => square !== "") && !winner) {
 			setWinner("DRAW")
 		}
+		let alreadyWin = false;
 		WIN_COMBINATIONS.forEach(combination => {
-			if (combination.every(item => squares[item] === "x")) {
-				setResults(prevResults => ({...prevResults, playerX: prevResults.playerX + 1}))
-				setWinner("Player X")
-			} else if (combination.every(item => squares[item] === "o")) {
-				setResults(prevResults => ({ ...prevResults, playerO: prevResults.playerO + 1 }))
-				setWinner("Player O")
+			if (!alreadyWin) {
+				if (combination.every(item => squares[item] === "x")) {
+					setResults(prevResults => ({ ...prevResults, playerX: prevResults.playerX + 1 }))
+					setWinner("Player X")
+					alreadyWin = true
+				} else if (combination.every(item => squares[item] === "o")) {
+					setResults(prevResults => ({ ...prevResults, playerO: prevResults.playerO + 1 }))
+					setWinner("Player O")
+					alreadyWin = true
+				}
 			}
 		})
 	}
