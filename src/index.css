@@ -13,13 +13,42 @@ body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	height: 100dvh;
 }
 
 .app {
+	font-family: "Belanosima", sans-serif;
+	color: #FFFFFF;
+}
 
+.results-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	column-gap: 3.5rem;
+	position: relative;
+}
+
+.results-container::before {
+	content: "";
+	position: absolute;
+	width: 2px;
+	height: 150%;
+	background-color: #FFFFFF;
+}
+
+.result-block > p {
+	font-weight: 600;
+	font-size: 2rem;
+	text-align: center;
+}
+.result-block > p > span {
+	font-weight: 400;
+	font-size: 2rem;
 }
 
 .squares-container {
+	margin: 4rem 0;
 	display: grid;
 	grid-template-columns: repeat(3, 100px);
 	grid-template-rows: repeat(3, 100px);
@@ -62,4 +91,45 @@ body {
 	border-radius: 50%;
 	border: 10px solid #FFFFFF;
 	
+}
+
+.turn-text {
+	text-align: center;
+	font-size: 1rem;
+	font-weight: 400;
+}
+
+.win-block {
+	text-align: center;
+}
+
+.congratulation-text {
+	font-size: 2rem;
+	font-weight: 400;
+}
+
+.button-play-again {
+	margin: 1.5rem 0 0.5rem;
+	border: none;
+	border-radius: 10px;
+	padding: 0.75rem 2.5rem;
+	font-size: 1.5rem;
+	font-weight: 600;
+	font-family: "Belanosima", sans-serif;
+	text-transform: uppercase;
+	color: #00BDAD;
+	box-sizing: border-box;
+}
+
+.button-play-again:hover,
+.button-play-again:focus {
+	cursor:pointer;
+	box-shadow: inset 0 0 0 4px #00A193;
+	transform: scale(1.1);
+}
+
+.reset-text {
+	font-size: 1rem;
+	font-weight: 400;
+	font-style: italic;
 }

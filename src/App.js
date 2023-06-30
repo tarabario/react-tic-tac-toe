@@ -68,14 +68,14 @@ function App() {
 	
 	const underGameField = () => (
 		winner ?
-		<>
-			<p className="congratulation">{winner} wins!</p>
+		<div className="win-block">
+			<p className="congratulation-text">{winner} wins!</p>
 			<button
 				className="button-play-again"
 				onClick={playAgain}
 			>play again</button>
-			<p className="reset-text">refresh the page to reload the results</p>
-		</>
+				<p className="reset-text">&#42;refresh the page to reload the results</p>
+		</div>
 		:
 		<p className="turn-text">Player {turn.toUpperCase()}'s turn!</p>
 	)
@@ -84,10 +84,10 @@ function App() {
 		<div className="app">
 			<div className="results-container">
 				<div className="result-block">
-					<p>Player X<br/>{results.playerX}</p>
+					<p>Player X<br/><span>{results.playerX}</span></p>
 				</div>
 				<div className="result-block">
-					<p>Player O<br/>{results.playerO}</p>
+					<p>Player O<br/><span>{results.playerO}</span></p>
 				</div>
 			</div>
 			<div className="squares-container">
