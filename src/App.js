@@ -24,6 +24,9 @@ function App() {
 	]
 	
 	function checkWin() {
+		if (squares.every(square => square !== "") && !winner) {
+			setWinner("DRAW")
+		}
 		WIN_COMBINATIONS.forEach(combination => {
 			if (combination.every(item => squares[item] === "x")) {
 				setResults(prevResults => ({...prevResults, playerX: prevResults.playerX + 1}))
@@ -34,7 +37,6 @@ function App() {
 			}
 		})
 	}
-
 	function fillSquare(id) {
 		!winner &&
 		setSquares(prevSquares => prevSquares.map((square, index) => {
@@ -69,7 +71,9 @@ function App() {
 	const underGameField = () => (
 		winner ?
 		<div className="win-block">
-			<p className="congratulation-text">{winner} wins!</p>
+			<p className="congratulation-text">
+				{winner === "DRAW" ? "It's a DRAW!" : `${winner} wins!`}
+			</p>
 			<button
 				className="button-play-again"
 				onClick={playAgain}
